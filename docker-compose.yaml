@@ -1,0 +1,23 @@
+version : '3.9'
+
+networks:
+  redis_test_network:
+    name: redis_test_network
+
+services:
+  resis-db:
+    image: redis:latest
+    container_name: redis-test
+    command: redis-server --save 1 60 --loglevel warning --requirepass test
+    ports:
+      - 6379:6379
+    volumes:
+      - chache:/data
+    networks:
+      - redis_test_network
+    
+
+volumes:
+  chache:
+    driver: local
+    
